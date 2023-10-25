@@ -4,7 +4,7 @@ from ino import Ino
 import time
 
 def events(screen, gun, bullets):
-    """обработка нажатий клавиш"""
+    #processing keycaps 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
@@ -23,7 +23,7 @@ def events(screen, gun, bullets):
                 gun.mleft = False
 
 def update(bg_color, screen, stats, sc, gun, inos, bullets):
-    """обновление экрана"""
+    #screen refreshing
     screen.fill(bg_color)
     sc.show_score()
     for bullet in bullets.sprites():
@@ -33,7 +33,7 @@ def update(bg_color, screen, stats, sc, gun, inos, bullets):
     pygame.display.flip()
 
 def update_bullets(screen, stats, sc, inos, bullets):
-    """обновление позиции пуль"""
+    #refreshing bullet position
     bullets.update()
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
@@ -50,7 +50,7 @@ def update_bullets(screen, stats, sc, inos, bullets):
         create_army(screen, inos)
 
 def gun_kill(stats, screen, sc, gun, inos, bullets):
-    """столкновение пушки и армии"""
+    #colision starship and inos
     if stats.guns_left > 0:
         stats.guns_left -= 1
         sc.image_guns()
@@ -64,14 +64,14 @@ def gun_kill(stats, screen, sc, gun, inos, bullets):
         sys.exit()
 
 def update_inos(stats, screen, sc, gun, inos, bullets):
-    """обновляет позицию пришельцев"""
+    #inos position refreshing
     inos.update()
     if pygame.sprite.spritecollideany(gun, inos):
         gun_kill(stats, screen, sc,  gun, inos, bullets)
     inos_check(stats, screen, sc, gun, inos, bullets)
 
 def inos_check(stats, screen, sc,gun, inos, bullets):
-    """проверка, добралась ли армия до края экрана"""
+    #borderline checking 
     screen_rect = screen.get_rect()
     for ino in inos.sprites():
         if ino.rect.bottom >= screen_rect.bottom:
@@ -79,7 +79,7 @@ def inos_check(stats, screen, sc,gun, inos, bullets):
             break
 
 def create_army(screen, inos):
-    """создание армии пришельцев"""
+    #creating army of inos
     ino = Ino(screen)
     ino_width = ino.rect.width
     number_ino_x = int((700 - 2 * ino_width) / ino_width)
@@ -96,7 +96,7 @@ def create_army(screen, inos):
             inos.add(ino)
 
 def check_high_score(stats, sc):
-    """проверка новых рекордов"""
+    #checking for new high score
     if stats.score > stats.high_score:
         stats.high_score = stats.score
         sc.image_high_score()

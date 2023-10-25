@@ -1,10 +1,10 @@
 import pygame
 
 class Ino(pygame.sprite.Sprite):
-    """класс одного пришельца"""
+    #class for inos
 
     def __init__(self, screen):
-        """инициализируем и задаем начальную позицию"""
+        #creating inos and puting them on their position
         super(Ino, self).__init__()
         self.screen = screen
         self.image = pygame.image.load('/Users/vladberezhnyi/Desktop/programming/space defenders/images/ino.png')
@@ -15,10 +15,10 @@ class Ino(pygame.sprite.Sprite):
         self.y = float(self.rect.y)
 
     def draw(self):
-        """вывод пришельца на экран"""
+        #inputing inos to screen
         self.screen.blit(self.image, self.rect)
 
     def update(self):
-        """перемещение пришельцев"""
+        #inos moves
         self.y += 0.1
         self.rect.y = self.y

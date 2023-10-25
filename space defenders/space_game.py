@@ -9,7 +9,7 @@ from scores import Scores
 def run():
     pygame.init()
     screen = pygame.display.set_mode((800,800))
-    pygame.display.set_caption("Космические защитники")
+    pygame.display.set_caption("Space Defenders")
     bg_color = (0, 0, 0)
     gun = Gun(screen)
     bullets = Group()
